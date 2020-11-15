@@ -32,8 +32,10 @@ from twitchio.errors import HTTPException
 from twitchio.http import HTTPSession
 
 
-User = namedtuple('User', ('id', 'login', 'display_name', 'email', 'type', 'broadcaster_type', 'description',
-                           'profile_image_url', 'offline_image_url', 'view_count', 'created_at'))
+user_fields = ('id', 'login', 'display_name', 'email', 'type',
+               'broadcaster_type', 'description', 'profile_image_url',
+               'offline_image_url', 'view_count', 'created_at')
+User = namedtuple('User', user_fields, defaults=(None, ) * len(user_fields))
 Chatters = namedtuple('Chatters', ('count', 'all', 'broadcaster', 'vips', 'moderators', 'staff',
                                    'admins', 'global_mods', 'viewers'))
 
@@ -72,7 +74,7 @@ class Client:
 
         data = await self.http.get_users(*users)
 
-        return [User(*user.values()) for user in data]
+        return [User(**user) for user in data]
 
     async def get_stream(self, channel: Union[int, str]):
         """|coro|
