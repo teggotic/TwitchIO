@@ -32,7 +32,7 @@ from twitchio.errors import HTTPException
 from twitchio.http import HTTPSession
 
 
-User = namedtuple('User', ('id', 'login', 'display_name', 'type', 'broadcaster_type', 'description',
+User = namedtuple('User', ('id', 'login', 'display_name', 'email', 'type', 'broadcaster_type', 'description',
                            'profile_image', 'offline_image', 'view_count'))
 Chatters = namedtuple('Chatters', ('count', 'all', 'broadcaster', 'vips', 'moderators', 'staff',
                                    'admins', 'global_mods', 'viewers'))
